@@ -1,2 +1,1 @@
-print("hello world")
-print("HelloWorld")
+print('this is my first python app')
