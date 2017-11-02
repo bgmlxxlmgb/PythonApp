@@ -30,8 +30,6 @@ class FileOperate:
         htmlsDataFile = open(dataFileName, "w+")
         htmlsDataFile.write(content)
         htmlsDataFile.close()
-
-
 if __name__ == "__main__":
     parentPath = "F:\\Development\\Project\\PythonApp\\src\\pers\\bgm\\main\\reptile\\resources"
     confFileName = "UrlsConf.txt"

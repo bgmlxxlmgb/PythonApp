@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*
 import urllib2
 from bs4 import BeautifulSoup
+from FilesOperate import FileOperate
 class Splider:
     def __init__(self):
         self.downloadUtils = DownloadUtils()
@@ -40,14 +41,17 @@ class ParseHtml:
 
 
 if __name__ =="__main__":
-    targetURL="https://list.jd.com/list.html?cat=9987,653,655&page=4&sort=sort_rank_asc&trans=1&JL=6_0_0#J_main"
-    splider = Splider()
+    print ""
+    fileOperate = FileOperate()
+    fileOperate.readByLines('F:\\Development\\Project\\PythonApp\\src\\pers\\bgm\\main\\reptile\\resources','UrlsConf.txt')
+    # targetURL="https://list.jd.com/list.html?cat=9987,653,655&page=4&sort=sort_rank_asc&trans=1&JL=6_0_0#J_main"
+    # splider = Splider()
 
-    downloadUtil = DownloadUtils()
-    content = downloadUtil.downloadSingleHtmlFile(targetURL)
+    # downloadUtil = DownloadUtils()
+    # content = downloadUtil.downloadSingleHtmlFile(targetURL)
 
-    parseHtml = ParseHtml()
-    parseHtml.parseSingleHtml(content)
+    # parseHtml = ParseHtml()
+    # parseHtml.parseSingleHtml(content)
 
 
 
