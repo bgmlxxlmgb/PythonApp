@@ -5,6 +5,7 @@ import time
 import urllib
 import requests
 import os
+from requests.adapters import HTTPAdapter
 
 headers = {
     'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
@@ -20,23 +21,29 @@ def saveImage( imgUrl,savePath,imgName ="default.jpg",dTimes=0 ):
     #response = urllib2.urlopen(request)
     #image = response.read()
     try:
-        image = requests.get(imgUrl)
         DstDir = savePath
+        if os.path.exists(DstDir + imgName):
+            return ""
+        time.sleep(1)
+        s = requests.Session()
+        s.mount('http://', HTTPAdapter(max_retries=3))
+        image = s.get(imgUrl, timeout=10)
         print("saveFile " + unicode(DstDir + imgName) + "\n")
         with open(DstDir+imgName ,"wb") as jpg:
             jpg.write( image.content)
             jpg.close
     except:
         print "下载图片进入异常"
-        if dTimes<3:
-            print "尝试下载"+imgUrl+"第"+(int(dTimes)+1)+"次"
-            saveImage(imgUrl,imgName,(++int(dTimes)))
-            jpg.close
+        return ""
+        #if dTimes<3:
+        #    print "尝试下载"+imgUrl+"第"+str(dTimes)+"次"
+        #    saveImage(imgUrl,imgName,dTimes+1)
+        #    jpg.close
 
 def downloadSingleHtmlFile(targetURL,dTime=0):
     if targetURL is None:
         print "error target url"
-        return None
+        return ""
     else:
         content = ""
         try:
@@ -44,13 +51,14 @@ def downloadSingleHtmlFile(targetURL,dTime=0):
             response = urllib2.urlopen(request)
             content = response.read()
         except:
-            print "进入异常"
-            if dTime<3:
-                print "尝试下载" + targetURL + "第" + (int(dTime) + 1) + "次"
-                content=downloadSingleHtmlFile(targetURL,(++int(dTime)))
-                return content
-            else:
-                return ""
+            print "下载网页进入异常"
+            return ""
+            #if dTime<3:
+            #    print "尝试下载" + targetURL + "第" + str(dTime) + "次"
+            #    content=downloadSingleHtmlFile(targetURL,dTime+1)
+            #    return content
+            #else:
+            #    return ""
         return content
 
 def downloadPicsInOnePage(main_url,savePath):
@@ -98,7 +106,6 @@ def queryAllPage(mode_urls,total):
                 print "\n"
     time.sleep(3)
 
-#<a href="htm_data/15/1711/876891.html" id="a_ajax_876891">[11.19] 两天搞定20岁小妞，逼白嫩白嫩的[45P]</a>
 #701
 # Pages: ( 1/701 total )
 def queryTotalPages(mode_urls):
@@ -118,8 +125,3 @@ mode_urls="http://w3.afulyu.rocks/pw/thread.php?fid=15&page="
 cnt=queryTotalPages(mode_urls)
 print cnt
 queryAllPage(mode_urls,cnt)
-
-
-
-
-
