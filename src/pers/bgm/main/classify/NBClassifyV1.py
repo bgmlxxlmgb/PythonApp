@@ -1,4 +1,6 @@
 # -*- coding:utf-8 -*-
+
+# To re set python golbal character
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
