@@ -51,7 +51,7 @@ def KMeans(dataSet, k, distMeans=distEcloud, createCent=randCenter):
 
 def KMeans1(dataset,k,distMeans=distEcloud):
     line_number=np.shape(dataset)[0]
-    row_number=np.shape(dataset)[1]
+    row_number = np.shape(dataset)[1]
     clusterMat=np.mat(np.zeros([line_number,row_number]))
     center_point=randCenter(dataset,k)
     clusterChanged=True
@@ -65,9 +65,9 @@ def KMeans1(dataset,k,distMeans=distEcloud):
                 if distJ < minDist:
                     minDist=distJ
                     minIndex=j
-                if clusterMat[i,0] !=minIndex:
-                    clusterChanged=True
-                clusterMat[i,:]=(minIndex,minDist**2)
+            if clusterMat[i,0] !=minIndex:
+                clusterChanged=True
+            clusterMat[i,:]=[minIndex,minDist**2]
 
         for cent in range(k):
             ptsInClust=dataset[np.nonzero(clusterMat[:,0].A==cent)[0]]
@@ -100,6 +100,6 @@ dataSetMatrix=np.mat([
 #vecB=np.array([4,4])
 #print distEcloud(vecA,vecB)
 
-center,cluster=KMeans(dataSetMatrix,5)
+center,cluster=KMeans1(dataSetMatrix,5)
 print center
 print cluster
