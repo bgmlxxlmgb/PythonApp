@@ -5,6 +5,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+# Inport word cut tools about jieba lib
 import jieba
 import random
 import time
