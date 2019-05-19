@@ -17,6 +17,7 @@ DOC_NUM=4000
 CLASS_SEX = 1
 CLASS_NOT_SEX=0
 
+#加载停用词，创建词袋子用于创建文档向量
 def loadstopword():
     stopwords = []
     lines = open('F://Development//DataTrain//stopwords.txt').readlines()
