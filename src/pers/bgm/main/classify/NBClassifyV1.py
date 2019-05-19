@@ -12,6 +12,7 @@ import time
 import pickle
 from numpy import *
 
+#Define some global varibal
 DOC_NUM=4000
 CLASS_SEX = 1
 CLASS_NOT_SEX=0
