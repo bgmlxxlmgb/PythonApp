@@ -99,7 +99,7 @@ dataSetMatrix=np.mat([
 #vecA=np.array([1,0])
 #vecB=np.array([4,4])
 #print distEcloud(vecA,vecB)
-
+#201907201715 update
 center,cluster=KMeans1(dataSetMatrix,5)
 print center
 print cluster
